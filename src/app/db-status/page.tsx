@@ -6,9 +6,7 @@ async function getDbStatus() {
     const userCount = await prisma.user.count();
     const latency = Date.now() - start;
 
-    const host = process.env["DATABASE_URL"]
-      ?.match(/@([^/]+)\//)?.[1]
-      ?.replace(/^(.{12}).*(.{20})$/, "$1***$2") ?? "unknown";
+    const host = process.env["DATABASE_URL"] ?? "unknown";
 
     const env =
       process.env.VERCEL_ENV ?? // "production" | "preview" | "development" on Vercel
